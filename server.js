@@ -10,6 +10,7 @@ const commentRouter = require('./routes/commentRouter');
 const likeRouter = require('./routes/likeRouter');
 const productRouter = require('./routes/productRouter');
 const productStatusRouter = require('./routes/productStatusRouter');
+const communityRouter = require('./routes/communityRouter');
 
 
 // middleware
@@ -24,6 +25,8 @@ app.use('/api/comments/', commentRouter);
 app.use('/api/likes/', likeRouter);
 app.use('/api/products/', productRouter);
 app.use('/api/product_status/', productStatusRouter);
+app.use('/api/communities/', communityRouter);
+
 
 // testing the api
 app.get('/', (req, res) => {
