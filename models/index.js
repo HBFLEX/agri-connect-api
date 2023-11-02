@@ -31,6 +31,8 @@ db.users = require('./User')(sequelize, DataTypes, Model);
 db.posts = require('./Post')(sequelize, DataTypes, Model);
 db.comments = require('./Comment')(sequelize, DataTypes, Model);
 db.likes = require('./Like')(sequelize, DataTypes, Model);
+db.products = require('./Product')(sequelize, DataTypes, Model);
+db.product_status = require('./ProductStatus')(sequelize, DataTypes, Model);
 
 db.sequelize.sync({ force: false, alter: true })
 .then(() => {
@@ -60,5 +62,15 @@ db.likes.belongsTo(db.users, { foreignKey: 'user_id' });
 // posts -> likes(one post many likes)
 db.posts.hasMany(db.likes, { foreignKey: 'post_id' });
 db.likes.belongsTo(db.posts, { foreignKey: 'post_id' });
+
+// user -> products(one user many products)
+db.users.hasMany(db.products, { foreignKey: 'product_owner_id' });
+db.products.belongsTo(db.users, { foreignKey: 'product_owner_id' });
+
+// product -> product_status(one product has one product_status)
+db.product_status.hasOne(db.products, { foreignKey: 'product_status_id' });
+db.products.belongsTo(db.product_status, { foreignKey: 'product_status_id' });
+
+
 
 module.exports = db;
