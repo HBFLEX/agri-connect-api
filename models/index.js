@@ -33,6 +33,7 @@ db.comments = require('./Comment')(sequelize, DataTypes, Model);
 db.likes = require('./Like')(sequelize, DataTypes, Model);
 db.products = require('./Product')(sequelize, DataTypes, Model);
 db.product_status = require('./ProductStatus')(sequelize, DataTypes, Model);
+db.communities = require('./Community')(sequelize, DataTypes, Model);
 
 db.sequelize.sync({ force: false, alter: true })
 .then(() => {
@@ -71,6 +72,9 @@ db.products.belongsTo(db.users, { foreignKey: 'product_owner_id' });
 db.product_status.hasOne(db.products, { foreignKey: 'product_status_id' });
 db.products.belongsTo(db.product_status, { foreignKey: 'product_status_id' });
 
+// user admin -> community(one user has many communities)
+db.users.hasOne(db.communities, { foreignKey: 'admin_id' });
+db.communities.belongsTo(db.users, { foreignKey: 'admin_id' });
 
 
 module.exports = db;
