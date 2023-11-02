@@ -8,6 +8,9 @@ const userRouter = require('./routes/userRouter');
 const postRouter = require('./routes/postRouter');
 const commentRouter = require('./routes/commentRouter');
 const likeRouter = require('./routes/likeRouter');
+const productRouter = require('./routes/productRouter');
+const productStatusRouter = require('./routes/productStatusRouter');
+
 
 // middleware
 app.use(cors({ origin: 'localhost:5000' }));
@@ -19,6 +22,8 @@ app.use('/api/users/', userRouter);
 app.use('/api/posts/', postRouter);
 app.use('/api/comments/', commentRouter);
 app.use('/api/likes/', likeRouter);
+app.use('/api/products/', productRouter);
+app.use('/api/product_status/', productStatusRouter);
 
 // testing the api
 app.get('/', (req, res) => {
