@@ -1,5 +1,8 @@
 const db = require('../models/index');
 const Post = db.posts;
+const User = db.users;
+const Like = db.likes;
+const Comment = db.comments;
 
 
 const addPost = async(req, res) => {
@@ -19,7 +22,7 @@ const getAllPosts = async(req, res) => {
 
 const getOnePost = async(req, res) => {
     const post_id = req.params.id;
-    const post = await Post.findOne({ where: {id: post_id} });
+    const post = await Post.findOne({ where: {id: post_id}, include: [User, Like, Comment] });
     res.status(200).json({ message: 'Post fetched successfully!', post: post });
 }
 
