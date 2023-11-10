@@ -11,6 +11,7 @@ const likeRouter = require('./routes/likeRouter');
 const productRouter = require('./routes/productRouter');
 const productStatusRouter = require('./routes/productStatusRouter');
 const communityRouter = require('./routes/communityRouter');
+const messageRouter = require('./routes/messageRouter');
 
 
 // middleware
@@ -26,12 +27,7 @@ app.use('/api/likes/', likeRouter);
 app.use('/api/products/', productRouter);
 app.use('/api/product_status/', productStatusRouter);
 app.use('/api/communities/', communityRouter);
-
-
-// testing the api
-app.get('/', (req, res) => {
-    res.json({ greetings: 'hello from express api' });
-})
+app.use('/api/messages/', messageRouter);
 
 
 // spin up the server

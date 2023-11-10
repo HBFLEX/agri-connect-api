@@ -34,6 +34,9 @@ db.likes = require('./Like')(sequelize, DataTypes, Model);
 db.products = require('./Product')(sequelize, DataTypes, Model);
 db.product_status = require('./ProductStatus')(sequelize, DataTypes, Model);
 db.communities = require('./Community')(sequelize, DataTypes, Model);
+db.messages = require('./Message')(sequelize, DataTypes, Model);
+//db.community_participants = require('./CommunityParticipant')(sequelize, DataTypes, Model);
+
 
 db.sequelize.sync({ force: false, alter: true })
 .then(() => {
@@ -76,5 +79,17 @@ db.products.belongsTo(db.product_status, { foreignKey: 'product_status_id' });
 db.users.hasOne(db.communities, { foreignKey: 'admin_id' });
 db.communities.belongsTo(db.users, { foreignKey: 'admin_id' });
 
+// // communities -> participants(many communities has many participant & vice versa)
+// db.communities.hasMany(db.community_participants, { foreignKey: 'community_id' });
+// db.users.belongsTo(db.community_participants, { foreignKey: 'user_id' });
+
+
+// communities -> messages(community has many messages)
+db.communities.hasMany(db.messages, { foreignKey: 'community_id' });
+db.messages.belongsTo(db.communities, { foreignKey: 'community_id' });
+
+// messages -> user(user has many messages)
+db.users.hasMany(db.messages, { foreignKey: 'author_id' });
+db.messages.belongsTo(db.users, { foreignKey: 'author_id' });
 
 module.exports = db;
