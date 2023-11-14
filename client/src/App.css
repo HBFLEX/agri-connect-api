@@ -1,42 +1,230 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.search-input{
+    background-color: rgb(241, 240, 240);
+    border-radius: 25px;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.link{
+    cursor: pointer;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.navbar-icons{
+    align-items: center;
+    border-radius: 100%;
+    background-color: azure;
+    color: rgb(17, 46, 82);
+    padding: 20px;
+    width: 20px;
+    height: 20px;
+    transition: all 0.3s ease-in;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.navbar-icons:hover{
+    background-color: rgb(58, 136, 136);
+    color: rgb(241, 244, 247);
 }
 
-.card {
-  padding: 2em;
+.user-profile{
+    border-radius: 100%;
+    object-fit: cover;
 }
 
-.read-the-docs {
-  color: #888;
+.create-post-container{
+    width: 100%;
+    background-color: white;
+    border-radius: 20px;
+}
+
+.top-part{
+    display: flex;
+    flex-direction: row;
+    gap: 18px;
+}
+
+.top-part input{
+    border-radius: 50px;
+    padding: 14px 20px;
+}
+
+hr{
+    border: 2px solid gainsboro;
+}
+
+a{
+    text-decoration: none;
+    color: rgb(35, 87, 132);
+}
+
+.add-activity-post{
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+}
+
+.add-activity-post .activity{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    cursor: pointer;
+}
+
+.activity .activity-icon{
+    width: 25px;
+    height: 25px;
+}
+
+.activity p{
+    font-size: 16px;
+}
+
+.post-card{
+    width: 100%;
+    border-radius: 20px;
+}
+
+.post-card img{
+    cursor: pointer;
+}
+
+.post-card .user-info{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.user-info{
+    flex-grow: 8;
+}
+
+.user-info .user-fullname{
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.posted-time{
+    font-weight: 200;
+}
+
+.post-options{
+    cursor: pointer;
+}
+
+.post-options:hover{
+    color: black;
+}
+
+.post-reactions{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 20px;
+}
+
+.reaction{
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+}
+
+.reaction .icon{
+    width: 23px;
+    height: 23px;
+}
+
+.comment{
+    flex-grow: 5;
+}
+
+.post-comment-input{
+    border-radius: 50px;
+    padding: 14px 20px;
+    height: 40px;
+}
+
+.post-comment{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 90%;
+    background-color: aliceblue;
+}
+
+.post-comment-fullname{
+    font-size: 16px;
+    font-weight: 600;
+    margin-left: 8px;
+    margin-top: 5px;
+    color: rgb(82, 82, 162);
+}
+
+.post-comment-content p{
+    font-size: 14px;
+}
+
+.left-container{
+    top: 20px;
+}
+
+
+.left-nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 30;
+}
+
+
+.left-nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.left-nav:hover{
+    background-color: azure;
+    color: rgb(24, 24, 24);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.nav-link-icon{
+    font-size: 25px;
+}
+
+.nav-link-text{
+    font-size: 25px;
+}
+
+.nav-active{
+    background-color: rgb(171, 169, 169);
+}
+
+
+.group-profile{
+    border-radius: 100%;
+    object-fit: cover;
+}
+
+.group-link-name{
+    font-size: 18px;
+}
+
+.right-container{
+    top: 20px;
+}
+
+.follow-user-btn{
+    width: 100%;
+}
+
+
+.chatbot-btn{
+    position: sticky;
+    bottom: 10px;
+    right: 10px;
+}
+
+.chatbot-btn-open{
+    width: 23%;
 }
