@@ -4,6 +4,9 @@ module.exports = (sequelize, DataTypes, Model) => {
     Post.init({
         postContent: {
             type: DataTypes.TEXT,
+        },
+        postImage: {
+            type: DataTypes.TEXT
         }
     }, {sequelize, modelName: 'post'});
 

@@ -15,7 +15,13 @@ const messageRouter = require('./routes/messageRouter');
 
 
 // middleware
-app.use(cors({ origin: 'localhost:5000' }));
+const corsOption = { 
+    origin:'*', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200 
+}
+
+app.use(cors(corsOption));
 app.use(urlencoded({ extended: true }));
 app.use(json());
 
@@ -31,7 +37,7 @@ app.use('/api/messages/', messageRouter);
 
 
 // spin up the server
-const PORT = process.env.PORT || 8080
+const PORT = process.env.PORT || 8000
 app.listen(PORT, () => {
     console.log(`server is listening on port ${PORT}`);
 })

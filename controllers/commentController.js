@@ -1,5 +1,6 @@
 const db = require('../models');
 const Comment = db.comments;
+const User = db.users;
 
 
 const addComment = async(req, res) => {
@@ -14,13 +15,13 @@ const addComment = async(req, res) => {
 }
 
 const getAllComments = async(req, res) => {
-    const comments = await Comment.findAll({});
+    const comments = await Comment.findAll({ include: [User] });
     res.status(200).json({ message: 'comments fetched successfully!', comments: comments });
 }
 
 const getOneComment = async(req, res) => {
     const comment_id = req.params.id;
-    const comment = await Comment.findOne({ where: {id: comment_id } });
+    const comment = await Comment.findOne({ where: {id: comment_id }, include: [User] });
     res.status(200).json({ message: 'comment fetched successfully!', comment: comment });
 }
 

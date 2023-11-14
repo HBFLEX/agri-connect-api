@@ -8,6 +8,7 @@ const Comment = db.comments;
 const addPost = async(req, res) => {
     const postInfo = {
         postContent: req.body.postContent,
+        postImage: req.body.postImage,
         post_author_id: req.body.post_author_id
     };
 
@@ -16,7 +17,7 @@ const addPost = async(req, res) => {
 }
 
 const getAllPosts = async(req, res) => {
-    const posts = await Post.findAll({});
+    const posts = await Post.findAll({ include: [ User, Like, {model: Comment, include: [User]} ] });
     res.status(200).json({ message: 'Post fetched successfully!', posts: posts });
 }
 
