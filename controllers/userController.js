@@ -1,3 +1,4 @@
+const create_jwt = require('../helpers/create_jwt');
 const db = require('../models');
 const User = db.users;
 
@@ -17,7 +18,9 @@ const addUser = async (req, res) => {
     };
 
     const user = await User.create(userInfo);
-    res.status(200).json({ message: 'User created successfully!', user: user })
+    const token = create_jwt(user);
+    res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 3 * 24, httpOnly: true });
+    res.status(200).json({ message: 'User created successfully!', user: user.id });
 }
 
 const getAllUsers = async(req, res) => {

@@ -13,6 +13,10 @@ module.exports = (sequelize, DataTypes, Model) => {
         price: {
             type: DataTypes.FLOAT
         },
+
+        productImage: {
+            type: DataTypes.STRING
+        },
     }, {sequelize, modelName: 'product'});
 
     return Product;
