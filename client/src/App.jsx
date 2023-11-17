@@ -5,6 +5,7 @@ import About from './screens/About'
 import SignUp from './screens/SignUp'
 import Martketplace from './screens/Marketplace'
 import SignIn from './screens/SignIn'
+import Groups from './screens/Groups'
 
 const App = () => {
 
@@ -17,6 +18,7 @@ const App = () => {
             <Route exact path="/signup" element={<SignUp />} ></Route>
             <Route exact path="/marketplace" element={<Martketplace />}></Route>
             <Route exact path='/signin' element={<SignIn />}></Route>
+            <Route exact path="/groups" element={<Groups />}></Route>
           </Routes>
       </Router>
     </>

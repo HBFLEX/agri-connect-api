@@ -21,7 +21,7 @@ const SideNavBar = () => {
                         <i className='nav-link-icon fa fa-user-group text-warning'></i>
                     </div>
                     <div>
-                        <a href='#' className='nav-link-text'>Groups</a>
+                        <a href='/groups' className='nav-link-text'>Groups</a>
                     </div>
                 </div>
 

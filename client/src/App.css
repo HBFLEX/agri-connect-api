@@ -280,3 +280,37 @@ a{
     transition: all 0.5s ease-out;
     opacity: 1;
 }
+
+.group-top-part{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.group-profile {
+    object-fit: cover;
+}
+
+.group-name{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.group-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.group-specs{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.group-members-total{
+    font-weight: bold;
+}
+
+.group-main-profile{
+    width: 100%;
+}
