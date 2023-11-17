@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import setCookie from '../hooks/setCookie';
+import removeCookie from '../hooks/removeCookie';
 // import redirect from '../helpers/redirect.jsx';
 
 
@@ -11,8 +13,21 @@ const SignIn = () => {
     // form data
     const [ email, setEmail ] = useState('');
     const [ password, setPassword ] = useState('');
-
+    const [ error, setError ] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+
+    // useEffect(() => {
+    //     setTimeout(() => {
+    //         const errorDiv = document.querySelector('.error-div');
+    //         console.log(errorDiv);
+    //         setTimeout(() => {
+    //             errorDiv.style.opacity = 0;
+    //             setTimeout(() => {
+    //                 // errorDiv.remove();
+    //             }, 1000)
+    //         }, 3000)
+    //     }, 3000)
+    // }, [error])
 
 
     // create a new user
@@ -21,11 +36,15 @@ const SignIn = () => {
             setIsLoading(true)
             const user = await axios.post('http://127.0.0.1:8000/api/users/login', userInfo)
             if(user.status === 200){
+                removeCookie('jwt');
+                setCookie('jwt', user.data.token, 3);
                 navigate('/');
                 console.log('User login successfully!');
                 console.log('Data',user.data);
             }
+
         }catch(e){
+            setError(e.response.data.error)
             console.log('error', e);
         }finally{
             setIsLoading(false);
@@ -47,6 +66,15 @@ const SignIn = () => {
 
   return (
     <div className='container'>
+
+        {
+            error 
+            && 
+            <div className='error-div mx-auto text-center alert alert-danger'>
+                { error } 
+            </div>
+        }
+
         <div className='form-container mt-5'>
             <div className='bg-white shadow-lg rounded px-4 py-3'>
                 <h2 className='form-header font-bold mb-5 text-center'>Login Here</h2>
