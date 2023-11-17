@@ -1,4 +1,4 @@
-const create_jwt = require('../helpers/create_jwt');
+const { hash_password } = require('../helpers/hash_password');
 const db = require('../models');
 const User = db.users;
 
@@ -7,6 +7,7 @@ const addUser = async (req, res) => {
     const userInfo = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
+        password: req.body.password,
         agriCooperativeName: req.body.agriCooperativeName,
         email: req.body.email,
         gender: req.body.gender,
@@ -16,10 +17,10 @@ const addUser = async (req, res) => {
         role: req.body.role,
         profilePic: req.body.profilePic    
     };
+    // hash password before saving to db
+    userInfo.password = await hash_password(userInfo.password);
 
     const user = await User.create(userInfo);
-    const token = create_jwt(user);
-    res.cookie('jwt', token, { maxAge: 1000 * 60 * 60 * 3 * 24, httpOnly: true });
     res.status(200).json({ message: 'User created successfully!', user: user.id });
 }
 

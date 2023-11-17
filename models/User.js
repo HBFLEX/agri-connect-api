@@ -52,6 +52,11 @@ module.exports = (sequelize, DataTypes, Model) => {
             }
         },
 
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+
         gender: {
             type: DataTypes.STRING,
             default: 'male',

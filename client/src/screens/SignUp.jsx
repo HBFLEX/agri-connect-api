@@ -1,16 +1,21 @@
 import { React, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom';
 import districts from '../data/malawianDistricts.js'
 import axios from 'axios';
 // import redirect from '../helpers/redirect.jsx';
 
 
 const SignUp = () => {
+
+    const navigate = useNavigate();
     
     // form data
     const [ firstName, setFirstName ] = useState('')
     const [ lastName, setLastName ] = useState('');
     const [ district, setDistrict ] = useState('Balaka');
     const [ phone, setPhone ] = useState('');
+    const [ password, setPassword ] = useState('');
+    const [ confirmPassword, setConfirmPassword ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ gender, setGender ] = useState('Male');
     const [ birthDate, setBirthDate ] = useState('');
@@ -23,6 +28,7 @@ const SignUp = () => {
             setIsLoading(true)
             const user = await axios.post('http://127.0.0.1:8000/api/users/add', userInfo)
             if(user.status === 200){
+                navigate('/signin');
                 console.log('User registered successfully!');
                 console.log('Data',user.data);
             }
@@ -58,6 +64,7 @@ const SignUp = () => {
             district: district,
             phone: parsedPhone,
             email: email,
+            password: password,
             gender: gender,
             birthDate: birthDate,
             role: 'farmer'
@@ -119,6 +126,22 @@ const SignUp = () => {
                         <label htmlFor="email" className='text-muted'>Email</label>
                         <input type='email' value={email} onChange={ (e) => setEmail(e.target.value) } id='email' placeholder='johndoe@gmail.com' className='form-control' />
                     </div>
+                    
+                    {/* password and confirm password */}
+                    <div className='row'>
+                        <div className='col-md-6'>
+                            <div className='mb-3'>
+                                <label htmlFor='password' className='text-muted'>Password</label>
+                                <input id='password' value={password} onChange={ (e) => setPassword(e.target.value) } type='password' placeholder='**********' className='form-control' />
+                            </div>
+                        </div>
+                        <div className='col-md-6'>
+                            <div className='mb-3'>
+                                <label htmlFor='confirmPassword' className='text-muted'>Repeat Password</label>
+                                <input id='confirmPassword' value={confirmPassword} onChange={ (e) => setConfirmPassword(e.target.value) } type='password' placeholder='**********' className='form-control' />
+                            </div>
+                        </div>
+                    </div>
 
                     {/* gender and birth date */}
                     <div className='row'>
@@ -152,7 +175,7 @@ const SignUp = () => {
 
                     }
                 </form>
-                <small className='text-muted'>Arleady have an account ? <a href='#'>Login Here</a></small>
+                <small className='text-muted'>Arleady have an account ? <a href='/signin'>Login Here</a></small>
             </div>
         </div>
     </div>
