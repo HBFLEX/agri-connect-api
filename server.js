@@ -13,6 +13,7 @@ const productRouter = require('./routes/productRouter');
 const productStatusRouter = require('./routes/productStatusRouter');
 const communityRouter = require('./routes/communityRouter');
 const messageRouter = require('./routes/messageRouter');
+const followRouter = require('./routes/followRouter');
 const signInRouter = require('./routes/signInRouter');
 const signOutRouter = require('./routes/signOutRouter');
 
@@ -38,6 +39,7 @@ app.use('/api/products/', productRouter);
 app.use('/api/product_status/', productStatusRouter);
 app.use('/api/communities/', communityRouter);
 app.use('/api/messages/', messageRouter);
+app.use('/api/follows', followRouter);
 app.use('/api/users/login/', signInRouter);
 app.use('/api/users/logout', signOutRouter);
 

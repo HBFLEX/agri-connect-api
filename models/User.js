@@ -87,7 +87,7 @@ module.exports = (sequelize, DataTypes, Model) => {
         profilePic: {
             type: DataTypes.STRING,
         }
-    }, {sequelize, modelName: 'User'});
+    }, {sequelize, modelName: 'user'});
 
     return User;
 }

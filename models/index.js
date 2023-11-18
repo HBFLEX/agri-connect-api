@@ -35,6 +35,7 @@ db.products = require('./Product')(sequelize, DataTypes, Model);
 db.product_status = require('./ProductStatus')(sequelize, DataTypes, Model);
 db.communities = require('./Community')(sequelize, DataTypes, Model);
 db.messages = require('./Message')(sequelize, DataTypes, Model);
+db.followers = require('../models/Follower')(sequelize, DataTypes, Model)
 //db.community_participants = require('./CommunityParticipant')(sequelize, DataTypes, Model);
 
 
@@ -78,6 +79,16 @@ db.products.belongsTo(db.product_status, { foreignKey: 'product_status_id' });
 // user admin -> community(one user has many communities)
 db.users.hasOne(db.communities, { foreignKey: 'admin_id' });
 db.communities.belongsTo(db.users, { foreignKey: 'admin_id' });
+
+// user -> user(user can follow another user)
+// follower relationship
+db.users.hasOne(db.followers, { foreignKey: 'follower_id' });
+db.followers.belongsTo(db.users, { foreignKey: 'follower_id' });
+
+// user -> user(user can follow another user)
+// following relationship
+db.users.hasOne(db.followers, { foreignKey: 'followed_id' });
+db.followers.belongsTo(db.users, { foreignKey: 'followed_id' });
 
 // // communities -> participants(many communities has many participant & vice versa)
 // db.communities.hasMany(db.community_participants, { foreignKey: 'community_id' });

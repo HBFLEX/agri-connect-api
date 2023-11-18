@@ -2,8 +2,6 @@ import { useState, useEffect } from 'react'
 import getCookie from '../hooks/getCookie'
 import setCookie from '../hooks/setCookie'
 import axios from 'axios'
-import user2 from '../assets/post-user-1.jpeg'
-import user3 from '../assets/post-user-2.jpeg'
 import Post from '../components/Post';
 import Navbar from '../components/Navbar'
 import SideNavBar from '../components/SideNavBar';
@@ -14,9 +12,11 @@ import SideNavBar from '../components/SideNavBar';
 const Home = () => {
 
     const [ posts, setPosts ] = useState([]);
-    const [ postsLoading, setPostsLoading ] = useState(false)
-    const [ postsFetchErr, setPostsFetchErr ] = useState(false)
+    const [ userListToFollow, setUserListToFollow ] = useState([])
+    const [ isLoading, setIsLoading ] = useState(false)
+    const [ error, setError ] = useState(false)
     const [ currentUser, setCurrentUser ] = useState(JSON.parse(getCookie('currentUser')));
+    const [ followBtnText, setFollowBtnText] = useState('Follow')
 
 
     const [ newPost, setNewPost ] = useState('');
@@ -24,19 +24,40 @@ const Home = () => {
     useEffect(() => {
         const getAllPosts = async () => {
             try{
-                setPostsLoading(true)
+                setIsLoading(true)
                 const posts = await axios.get('http://127.0.0.1:8000/api/posts')   
                 if(posts.status === 200)
                     setPosts(posts.data.posts)
             }catch(err){
-                setPostsFetchErr(true)
+                setError(true)
             }finally{
-                setPostsLoading(false)
+                setIsLoading(false)
             }
 
         }
-        getAllPosts()
+
+        const getAllUsers = async() => {
+            
+            try{
+                setIsLoading(true)
+                const users = await axios.get('http://127.0.0.1:8000/api/users')
+
+                if(users.status === 200){
+                    setUserListToFollow(users.data.users)
+                    console.log('users',users.data.users)
+                }
+            }catch(err){
+                setError(true)
+                console.log(err)
+            }finally{
+                setIsLoading(false)
+            }
+        }
+        getAllPosts() // fetching all posts
+        getAllUsers() // fetch all users
     }, [])
+
+    const filteredUsers = userListToFollow.filter((user) => user.id !== currentUser.id)
 
     // create new post
 
@@ -51,7 +72,7 @@ const Home = () => {
             const request = await axios.post('http://127.0.0.1:8000/api/posts/add', postInfo)
      
             if(request.status === 200){
-                setCookie('currentUser', JSON.stringify(request.data.user))
+                setCookie('currentUser', JSON.stringify(request.data.post.user))
                 alert('Post created successfully!')
             }
         }catch(err){
@@ -59,6 +80,23 @@ const Home = () => {
         }
     }
 
+    const followUser = async (event, user_to_follow) => {
+        event.preventDefault()
+        try{
+            const followData = {
+                followed_id: user_to_follow,
+                follower_id: currentUser.id
+            }
+
+            const request = await axios.post('http://127.0.0.1:8000/api/follows/add', followData)
+
+            if(request.status === 200){
+                setFollowBtnText('Following')
+            }
+        }catch(err){
+            alert('failed to follow user')
+        }
+    }
 
     return (
         <>
@@ -99,14 +137,14 @@ const Home = () => {
 
                         {/* Posts */}
                         {
-                            postsLoading && 
+                            isLoading && 
                             <div className='text-center'>
                                 <div className="spinner-border mt-5 text-info" role="status">
                                     <span className="visually-hidden">Loading...</span>
                                 </div>
                             </div> ||
-                            postsFetchErr && <div className='mt-5 text-center'>Error getting posts, check your internet connection or try to refresh the page!</div> ||
-                            postsLoading === false && postsFetchErr === false && posts.map((post) => (
+                            error && <div className='mt-5 text-center'>Error getting posts, check your internet connection or try to refresh the page!</div> ||
+                            isLoading === false && error === false && posts.map((post) => (
                                 <Post post={post} commentAuthor={currentUser} key={post.id} />
                             ))
                         }
@@ -116,25 +154,25 @@ const Home = () => {
                         <div className='right-container'>
                             <h4>Must follow</h4>
                             {/* people */}
-                            <div className='left-nav mt-4'>
-                                <img src={user2} width={30} height={30} className='group-profile mx-3' />
-                                <div>
-                                    <a href='#' className='group-link-name'>John Kayange</a>
-                                    <div>
-                                        <button className='follow-user-btn btn-sm btn-info'>Follow</button>
-                                    </div>
-                                </div>
-                            </div>
 
-                            <div className='left-nav mt-4'>
-                                <img src={user3} width={30} height={30} className='group-profile mx-3' />
-                                <div>
-                                    <a href='#' className='group-link-name'>Lucy Matimati</a>
-                                    <div>
-                                        <button className='follow-user-btn btn-sm btn-info'>Follow</button>
+                            {
+                                isLoading && <p>Getting users...</p> ||
+                                error && <p>Error fetching users</p> ||
+                                isLoading === false && error === false && filteredUsers.map((user) => (
+                                    <div className='left-nav mt-4'>
+                                        <img src={user.profilePic} width={30} height={30} className='group-profile mx-3' />
+                                        <div>
+                                            <a href='#' className='group-link-name'>{`${user.firstName} ${user.lastName}`}</a>
+                                            <div>
+                                                <form onSubmit={(event) => followUser(event, user.id)}>
+                                                    <button type='submit' className='follow-user-btn btn-sm btn-info'>{followBtnText}</button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
+                                ))
+                            }
+                            
                         </div>
                     </div>
                 </div>

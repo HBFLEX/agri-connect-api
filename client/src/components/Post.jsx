@@ -34,11 +34,11 @@ const Post = (props) => {
         <div className='post-card mt-5 mb-5 bg-white p-3'>
             <div className='top-part'>
                 <a href='/profile'>
-                    <img src={props.post.User.profilePic} width={47} height={49} className='user-profile rounded-circle' />
+                    <img src={props.post.user?.profilePic} width={47} height={49} className='user-profile rounded-circle' />
                 </a>
                 <div className='user-info'>
                     <a href='/profile'>
-                        <h5 className='user-fullname mb-0'>{`${props.post.User.firstName} ${props.post.User.lastName}`}</h5>
+                        <h5 className='user-fullname mb-0'>{`${props.post.user?.firstName} ${props.post.user?.lastName}`}</h5>
                     </a>
                     <small className='posted-time'>{ new Date(props.post.createdAt).toDateString() }</small>
                 </div>
@@ -49,14 +49,14 @@ const Post = (props) => {
             <p className='post-content mt-3'>
                 { props.post.postContent }
             </p>
-            { props.post.postImage && <img src={props.post.postImage} width="100%" className='rounded' /> }
+            { props.post.postImage && <img src={props.post?.postImage} width="100%" className='rounded' /> }
             <div className='post-reactions mt-3'>
                 <div className='reaction'>
                     { props.post.likes.length > 0  
                         ? <span><i className='icon fa fa-heart mt-3'></i></span> 
                         : <span><i className='icon fa-regular fa-heart mt-3'></i></span>
                     }
-                    <p className='mt-3'>{ props.post.likes.length }</p>
+                    <p className='mt-3'>{ props.post?.likes.length }</p>
                 </div>
 
                 <div className='reaction comment'>
@@ -64,7 +64,7 @@ const Post = (props) => {
                         ? <span><i className='icon fa fa-comment-dots mt-3'></i></span>
                         : <span><i className='icon fa-regular fa-comment-dots mt-3'></i></span>
                     }
-                    <p className='mt-3'>{ props.post.comments.length }</p>
+                    <p className='mt-3'>{ props.post?.comments.length }</p>
                 </div>
                 <form onSubmit={createNewPostCommentHandle}>
                     {
@@ -82,10 +82,10 @@ const Post = (props) => {
                 <div>
                     <hr/>
                     <div className='post-comment rounded'>
-                        <img src={props.post.comments[0].User.profilePic} width={28} height={28} className='user-profile rounded-circle' />
+                        <img src={props.post.comments[0].User?.profilePic} width={28} height={28} className='user-profile rounded-circle' />
                         <div className='post-comment-content rounded'>
                             <div>
-                                <p className='post-comment-fullname mb-0'>{props.post.comments[0].User.firstName}</p>
+                                <p className='post-comment-fullname mb-0'>{props.post?.comments[0].User.firstName}</p>
                                 <p className='p-2'>{props.post.comments[0].commentContent}</p>
                             </div>
                         </div>
@@ -114,7 +114,7 @@ const Post = (props) => {
                                 <img src={comment.User.profilePic} width={28} height={28} className='user-profile rounded-circle' />
                                 <div className='post-comment-content rounded'>
                                     <div>
-                                        <p className='post-comment-fullname mb-0'>{comment.User.firstName}</p>
+                                        <p className='post-comment-fullname mb-0'>{comment?.User.firstName}</p>
                                         <p className='p-2'>{comment.commentContent}</p>
                                     </div>
                                 </div>
