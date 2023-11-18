@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import SideNavBar from '../components/SideNavBar';
-import userProfilePic from '../assets/post-user-1.jpeg'
-import postImage from '../assets/post-1.jpg'
 import getCookie from '../hooks/getCookie.js'
 import setCookie from '../hooks/setCookie.js'
 
@@ -77,7 +75,7 @@ const Profile = () => {
                             </div>
 
                             {
-                                currentUser.posts.length > 0
+                                currentUser.posts?.length > 0
                                 ? 
                                 <div className='row'>
                                     <h3 className='mb-4'>{`${currentUser.firstName} ${currentUser.lastName}'s posts (${currentUser.posts.length})`}</h3>

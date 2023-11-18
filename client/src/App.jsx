@@ -7,6 +7,7 @@ import Martketplace from './screens/Marketplace'
 import SignIn from './screens/SignIn'
 import Groups from './screens/Groups'
 import Profile from './screens/Profile'
+import ProductDetail from './screens/ProductDetail'
 
 const App = () => {
 
@@ -21,6 +22,7 @@ const App = () => {
             <Route exact path='/signin' element={<SignIn />}></Route>
             <Route exact path="/groups" element={<Groups />}></Route>
             <Route exact path="/profile" element={<Profile />}></Route>
+            <Route exact path="/marketplace/product/:id" element={<ProductDetail />}></Route>
           </Routes>
       </Router>
     </>

@@ -54,7 +54,9 @@ const Martketplace = () => {
                                 </div> ||
                                 errors && <div className='mt-5 mx-2'>Error getting products, check your internet connection or try to refresh the page!</div> ||
                                 isLoading === false && errors === false && products.map((product) => (
-                                    <Product product={product} key={product.id} />
+                                    <div className='col-md-6'>
+                                        <Product product={product} page='marketplace' key={product.id} />
+                                    </div>
                                 ))
                             }
                         </div>
