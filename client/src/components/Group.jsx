@@ -10,7 +10,7 @@ const Group = ({ group }) => {
                 <div className='group-info'>
                     <p className='group-name mb-0'>{ group.name }</p>
                     <div className='group-specs'>
-                        <p>{ group.admin_id }</p>
+                        <p>{ group.User.agriCooperativeName}</p>
                         <p className='group-members-total text-success'>132.7k members</p>
                     </div>
                 </div>

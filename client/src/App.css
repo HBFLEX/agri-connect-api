@@ -23,9 +23,15 @@
     color: rgb(241, 244, 247);
 }
 
+.nav-link-v2{
+    display: flex;
+    flex-direction: row;
+}
+
 .user-profile{
-    border-radius: 100%;
     object-fit: cover;
+    width: 58px;
+    height: 58px;
 }
 
 .create-post-container{
@@ -313,4 +319,86 @@ a{
 
 .group-main-profile{
     width: 100%;
+}
+
+.profile-pic{
+    object-fit: cover;
+}
+
+.profile-fullname{
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.profile-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-menu{
+    height: 40px;
+    display: flex;
+    gap: 20px;
+}
+
+.profile-about-xp{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-location-container{
+    background-color: rgb(241, 240, 240);
+}
+
+.profile-location{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.profile-post{
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(241, 240, 240);
+}
+
+.profile-post-pic{
+    object-fit: cover;
+}
+
+.profile-post-info{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.profile-post-fullname{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.profile-post-info-details{
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-post-image{
+    width: 100%;
+}
+
+.profile-post-view-more-btn{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+.nav-btn{
+    border: none;
+    background: transparent;
+}
+
+.no-posts{
+    font-size: 20px;
+    font-weight: bold;
 }

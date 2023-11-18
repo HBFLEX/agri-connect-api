@@ -1,6 +1,7 @@
 const { hash_password } = require('../helpers/hash_password');
 const db = require('../models');
 const User = db.users;
+const Post = db.posts
 
 
 const addUser = async (req, res) => {
@@ -31,14 +32,15 @@ const getAllUsers = async(req, res) => {
 
 const getOneUser = async(req, res) => {
     const user_id = req.params.id;
-    const user = await User.findOne({ where: { id: user_id } });
+    const user = await User.findOne({ where: { id: user_id }, include: [Post] });
     res.status(200).json({ message: 'User fetched successfully!', user: user });
 }
 
 const updateUser = async(req, res) => {
     const user_id = req.params.id;
     const user = await User.update(req.body, { where: { id: user_id } });
-    res.status(200).json({ message: 'User updated successfully!', user: user });
+    const updatedUserInfo = await User.findOne({ where: { id: user_id }, include: [Post] })
+    res.status(200).json({ message: 'User updated successfully!', user: updatedUserInfo });
 }
 
 const deleteUser = async(req, res) => {

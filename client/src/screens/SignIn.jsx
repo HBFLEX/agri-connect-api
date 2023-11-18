@@ -37,7 +37,9 @@ const SignIn = () => {
             const user = await axios.post('http://127.0.0.1:8000/api/users/login', userInfo)
             if(user.status === 200){
                 removeCookie('jwt');
+                removeCookie('currentUser');
                 setCookie('jwt', user.data.token, 3);
+                setCookie('currentUser', JSON.stringify(user.data.user), 3)
                 navigate('/');
                 console.log('User login successfully!');
                 console.log('Data',user.data);

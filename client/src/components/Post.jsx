@@ -5,7 +5,7 @@ const Post = ({ post }) => {
   return (
     <div className='post-card mt-5 mb-5 bg-white p-3'>
         <div className='top-part'>
-            <img src={post.User.profilePic} width={47} height={49} className='user-profile' />
+            <img src={post.User.profilePic} width={47} height={49} className='user-profile rounded-circle' />
             <div className='user-info'>
                 <h5 className='user-fullname mb-0'>{ post.User.firstName + ' ' + post.User.lastName }</h5>
                 <small className='posted-time'>{ new Date(post.createdAt).toDateString() }</small>
@@ -43,7 +43,7 @@ const Post = ({ post }) => {
             <div>
                 <hr/>
                 <div className='post-comment rounded'>
-                    <img src={post.comments[0].User.profilePic} width={28} height={28} className='user-profile' />
+                    <img src={post.comments[0].User.profilePic} width={28} height={28} className='user-profile rounded-circle' />
                     <div className='post-comment-content rounded'>
                         <div>
                             <p className='post-comment-fullname mb-0'>{post.comments[0].User.firstName}</p>

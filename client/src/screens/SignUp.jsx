@@ -29,8 +29,6 @@ const SignUp = () => {
             const user = await axios.post('http://127.0.0.1:8000/api/users/add', userInfo)
             if(user.status === 200){
                 navigate('/signin');
-                console.log('User registered successfully!');
-                console.log('Data',user.data);
             }
         }catch(e){
             console.log('error', e);

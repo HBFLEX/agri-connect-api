@@ -1,5 +1,6 @@
 const db = require('../models');
 const Community = db.communities;
+const User = db.users;
 
 
 const addCommunity = async(req, res) => {
@@ -15,7 +16,7 @@ const addCommunity = async(req, res) => {
 }
 
 const getAllCommunities = async(req, res) => {
-    const communities = await Community.findAll({});
+    const communities = await Community.findAll({ include: [User] });
     res.status(200).json({ message: 'Communities fetched successfully!', communities: communities });
 }
 
