@@ -13,11 +13,12 @@ const addPost = async(req, res) => {
     };
 
     const post = await Post.create(postInfo);
-    res.status(200).json({ message: 'Post created successfully!', post: post });
+    const user = await User.findOne({ where: {id: post.post_author_id} })
+    res.status(200).json({ message: 'Post created successfully!', post: post, user: user });
 }
 
 const getAllPosts = async(req, res) => {
-    const posts = await Post.findAll({ include: [ User, Like, {model: Comment, include: [User]} ] });
+    const posts = await Post.findAll({ include: [ User, Like, {model: Comment, include: [User]} ], order: [['createdAt', 'DESC']] });
     res.status(200).json({ message: 'Post fetched successfully!', posts: posts });
 }
 

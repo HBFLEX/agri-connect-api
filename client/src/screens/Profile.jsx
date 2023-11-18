@@ -110,55 +110,55 @@ const Profile = () => {
 
             {/* modal */}
             <div className="modal fade" id="editProfileModal" tabindex="-1" aria-labelledby="editProfileModalLabel" aria-hidden="true">
-            <div className="modal-dialog">
-                <div className="modal-content">
-                <div className="modal-header">
-                    <h5 className="modal-title" id="editProfileModalLabel">Edit Profile</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div className="modal-body">
-                    <div className='profile-edit-form'>
-                        <form onSubmit={updateProfileHandle}>
-                            {/* first name */}
-                            <div className='mb-2'>
-                                <label className='text-muted' htmlFor='firstName'>First Name</label>
-                                <input onChange={(e) => setFirstName(e.target.value) } id='firstName' className='form-control' type='text' value={firstName} />
-                            </div>
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                    <div className="modal-header">
+                        <h5 className="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div className="modal-body">
+                        <div className='profile-edit-form'>
+                            <form onSubmit={updateProfileHandle}>
+                                {/* first name */}
+                                <div className='mb-2'>
+                                    <label className='text-muted' htmlFor='firstName'>First Name</label>
+                                    <input onChange={(e) => setFirstName(e.target.value) } id='firstName' className='form-control' type='text' value={firstName} />
+                                </div>
 
-                            {/* last name */}
-                            <div className='mb-2'>
-                                <label className='text-muted' htmlFor='lastName'>Last Name</label>
-                                <input onChange={(e) => setLastName(e.target.value) } id='lastName' className='form-control' type='text' value={lastName} />
-                            </div>
+                                {/* last name */}
+                                <div className='mb-2'>
+                                    <label className='text-muted' htmlFor='lastName'>Last Name</label>
+                                    <input onChange={(e) => setLastName(e.target.value) } id='lastName' className='form-control' type='text' value={lastName} />
+                                </div>
 
-                            {/* email */}
-                            <div className='mb-2'>
-                                <label className='text-muted' htmlFor='email'>Email</label>
-                                <input onChange={(e) => setEmail(e.target.value) } id='email' className='form-control' type='email' value={email} />
-                            </div>
+                                {/* email */}
+                                <div className='mb-2'>
+                                    <label className='text-muted' htmlFor='email'>Email</label>
+                                    <input onChange={(e) => setEmail(e.target.value) } id='email' className='form-control' type='email' value={email} />
+                                </div>
 
-                            {/*  phone */}
-                            <div className='mb-2'>
-                                <label className='text-muted' htmlFor='phone'>Phone</label>
-                                <input onChange={(e) => setPhone(e.target.value) } id='phone' className='form-control' type='phone' value={phone} />
-                            </div>
+                                {/*  phone */}
+                                <div className='mb-2'>
+                                    <label className='text-muted' htmlFor='phone'>Phone</label>
+                                    <input onChange={(e) => setPhone(e.target.value) } id='phone' className='form-control' type='phone' value={phone} />
+                                </div>
 
-                            <div className="modal-footer mt-5">
-                                <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                {
-                                    isLoading
-                                    ? 
-                                        <button className="spinner-border text-info" role="status">
-                                            <span className="visually-hidden">Loading...</span>
-                                        </button>
-                                    : <button type="submit" className="btn btn-primary">Save changes</button>
-                                }
-                            </div>
-                        </form>
+                                <div className="modal-footer mt-5">
+                                    <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                    {
+                                        isLoading
+                                        ? 
+                                            <button className="spinner-border text-info" role="status">
+                                                <span className="visually-hidden">Saving...</span>
+                                            </button>
+                                        : <button type="submit" className="btn btn-primary">Save changes</button>
+                                    }
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                     </div>
                 </div>
-                </div>
-            </div>
             </div>
         </>
     )

@@ -1,6 +1,7 @@
 const db = require('../models');
 const Comment = db.comments;
 const User = db.users;
+const Post = db.posts
 
 
 const addComment = async(req, res) => {
@@ -11,7 +12,8 @@ const addComment = async(req, res) => {
     };
 
     const comment = await Comment.create(commentInfo);
-    res.status(200).json({ message: 'comment created successfully!', comment: comment });
+    const post = await Post.findOne({ where: { id: comment.post_id } })
+    res.status(200).json({ message: 'comment created successfully!', comment: comment, post: post });
 }
 
 const getAllComments = async(req, res) => {

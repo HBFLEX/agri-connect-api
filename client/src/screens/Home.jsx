@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
+import getCookie from '../hooks/getCookie'
+import setCookie from '../hooks/setCookie'
 import axios from 'axios'
-import userLogo from '../assets/user.jpg'
 import user2 from '../assets/post-user-1.jpeg'
 import user3 from '../assets/post-user-2.jpeg'
 import Post from '../components/Post';
@@ -15,6 +16,10 @@ const Home = () => {
     const [ posts, setPosts ] = useState([]);
     const [ postsLoading, setPostsLoading ] = useState(false)
     const [ postsFetchErr, setPostsFetchErr ] = useState(false)
+    const [ currentUser, setCurrentUser ] = useState(JSON.parse(getCookie('currentUser')));
+
+
+    const [ newPost, setNewPost ] = useState('');
 
     useEffect(() => {
         const getAllPosts = async () => {
@@ -33,6 +38,27 @@ const Home = () => {
         getAllPosts()
     }, [])
 
+    // create new post
+
+    const createNewPostHandle = async (e) => {
+
+        const postInfo = {
+            postContent: newPost,
+            post_author_id: currentUser.id
+        }
+
+        try{
+            const request = await axios.post('http://127.0.0.1:8000/api/posts/add', postInfo)
+     
+            if(request.status === 200){
+                setCookie('currentUser', JSON.stringify(request.data.user))
+                alert('Post created successfully!')
+            }
+        }catch(err){
+            alert('There was an error creating a post. Try again later!')
+        }
+    }
+
 
     return (
         <>
@@ -45,8 +71,12 @@ const Home = () => {
                     <div className='col-md-6'>
                         <div className='create-post-container bg-white p-4'>
                             <div className='top-part mb-4'>
-                                <img src={userLogo} width={58} height={58} className='user-profile' />
-                                <input type='text' className='form-control' placeholder='Whats on your mind ?' />
+                                <a href='/profile'>
+                                    <img src={currentUser.profilePic} width={58} height={58} className='user-profile rounded-circle' />
+                                </a>
+                                <form onSubmit={createNewPostHandle}>
+                                    <input value={newPost} onChange={(e) => setNewPost(e.target.value)} type='text' className='form-control' placeholder='Whats on your mind ?' />
+                                </form>
                             </div>
                             <hr />
                             <div className='add-activity-post mt-4 mb-0'>
@@ -77,7 +107,7 @@ const Home = () => {
                             </div> ||
                             postsFetchErr && <div className='mt-5 text-center'>Error getting posts, check your internet connection or try to refresh the page!</div> ||
                             postsLoading === false && postsFetchErr === false && posts.map((post) => (
-                                <Post post={post} key={post.id} />
+                                <Post post={post} commentAuthor={currentUser} key={post.id} />
                             ))
                         }
                     </div>
