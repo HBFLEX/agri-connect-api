@@ -8,7 +8,7 @@ const Product = ({ product }) => {
             <div className='top-part'>
                 <img className='product-user-profile' src={product.User.profilePic} height={50} width={50} />
                 <div className='product-user-info'>
-                    <p className='product-user-name mb-0'>{product.User.firstName + ' ' + product.User.lastName}</p>
+                    <p className='product-user-name mb-0'>{`${product.User.firstName} ${product.User.lastName}`}</p>
                     <small>{new Date(product.createdAt).toDateString()}</small>
                 </div>      
             </div>
@@ -19,6 +19,7 @@ const Product = ({ product }) => {
             {/* product image */}
             <img src={product.productImage} width='100%' className='rounded' />
             <p className='product-name text-muted mt-3'>{product.name}</p>
+            <p>MWK { product.price }</p>
             <button className='btn btn-outline-warning mx-auto d-block mt-3'>View More</button>
         </div>
     </div>

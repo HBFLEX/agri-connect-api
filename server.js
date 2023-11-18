@@ -42,16 +42,6 @@ app.use('/api/users/login/', signInRouter);
 app.use('/api/users/logout', signOutRouter);
 
 
-app.get('/login', (req, res) => {
-    res.cookie('username', 'jason', { maxAge: 1000 * 60 * 60 * 24, secure: true, httpOnly: true });
-    res.json({ message: 'cookie set' });
-});
-
-app.get('/get-cookies', (req, res) => {
-    res.json({cookies: req.cookies});
-})
-
-
 // spin up the server
 const PORT = process.env.PORT || 8000
 app.listen(PORT, () => {

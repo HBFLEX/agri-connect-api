@@ -61,6 +61,7 @@ const Profile = () => {
                     </div>
                     {/* right side */}
                     <div className='col-md-9'>
+                        <h1 className='text-muted mb-4'>Profile</h1>
                         <div className="bg-white rounded p-3">
                             {/* profile info */}
                             <div className='profile-container'>

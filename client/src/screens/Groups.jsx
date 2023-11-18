@@ -44,6 +44,7 @@ const Groups = () => {
                         <SideNavBar />
                     </div>
                     <div className='col-md-9'>
+                    <h1 className='text-muted mb-4'>Groups</h1>
                         <div className='row'>
                             {/* group 1 */}
                             
